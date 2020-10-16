@@ -1,0 +1,26 @@
+body{
+    background-color: khaki;
+    font-family:'Courier New', Courier, monospace;
+    font-size:25;
+    color: black;
+}
+div#container{
+    width: 970px;
+    padding:10px;
+    margin: 0 auto;
+}
+h1{
+    width:950px;
+    padding:10px;
+    text-align: center;
+    background-color: cadetblue;
+    border:rosybrown;
+}
+h2.sections{
+    width:950px;
+    padding:10px;
+    background-color:thistle;
+}
+img{
+    border:5px dashed green
+}
