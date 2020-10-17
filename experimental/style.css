@@ -4,11 +4,35 @@ body{
     font-size:25;
     color: black;
 }
+
+div#head{
+    width: 970px;
+    padding:0px;
+    margin: 0 auto;
+}
+
+/*Nav-bar experimental set up*/
+/*this styles the top navigation bar's LOOK*/
+div.nav-bar{
+    overflow: hidden;
+}
+/*this will style the nav bars LINKS*/
+div.nav-bar a {
+    float:left;
+    display:block;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+/*END STYLING FOR NAV BAR*/
+
+/*Begin Styling for Container*/
 div#container{
     width: 970px;
     padding:10px;
     margin: 0 auto;
 }
+/*END STYLING FOR ID = CONTAINER */
 h1{
     width:950px;
     padding:10px;
@@ -16,6 +40,7 @@ h1{
     background-color: cadetblue;
     border:rosybrown;
 }
+
 h2.sections{
     width:950px;
     padding:10px;
