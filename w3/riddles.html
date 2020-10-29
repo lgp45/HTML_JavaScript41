@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/style.css">
     <script link="JavaScript" src="js/riddles.js"></script>
 </head>
-<body>
+<body id="body">
     <div id="main-container">
         <!--header-->
         <div id="header">
@@ -70,6 +70,8 @@
                     <input type="button" value="Show Answer" onclick="showAnswer('He was Bald.', 'answer10')">
                     <span id="answer10"></span>
                     <hr>
+                    <button type="button" onclick="document.getElementById('body').style.backgroundImage = url('images/galaxy2.jpg')">Swap Background?</button>
+                    
                 </div>
             </div>
         </div>

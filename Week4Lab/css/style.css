@@ -1,0 +1,47 @@
+/* CSS GOES HERE */
+
+html, body{
+    height: 100%;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+}
+
+#container{
+    width: 1000px;
+    background-color: tomato;
+    padding: 10px;
+}
+
+header{
+    background-color: white;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+nav{
+    background-color: white;
+    margin-bottom: 10px;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+canvas{
+    background-color: white;
+    border: 1px solid black;
+    margin-top: 10px;
+}
+
+footer{
+    background-color: white;
+    margin-bottom: 10px;
+    text-align: center;
+}
