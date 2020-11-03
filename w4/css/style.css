@@ -1,0 +1,55 @@
+/* CSS GOES HERE */
+
+html, body{
+    height: 100%;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background-color: darkgray;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+}
+
+#container{
+    width: 1000px;
+    background-color: slategray;
+    padding: 10px;
+}
+
+header{
+    background-color: yellowgreen;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+nav{
+    background-color: yellowgreen;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.nav-btn{
+    background-color: greenyellow;
+    border: 5px solid green;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+canvas{
+    
+    background-image: url("../images/Background.png");
+    border: 2px double darkgrey;
+    margin-top: 10px;
+}
+
+footer{
+    background-color: yellowgreen;
+    margin-bottom: 10px;
+    text-align: center;
+}
