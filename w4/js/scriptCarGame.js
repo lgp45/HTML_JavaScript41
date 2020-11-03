@@ -42,8 +42,11 @@ var mySound;
 mySound.src = mySound('sounds/musica.mpg');
 
 
+
+
 //start main
 function main(){
+    
     timer = requestAnimationFrame(main);
     
     //clears the canvas
@@ -51,7 +54,9 @@ function main(){
     //draw game objects
     
     
+    
     //draw start line
+    
     drawStartLine();
     drawFinishLine();
     drawSprite();
@@ -97,6 +102,8 @@ function main(){
 function music(){
     mySound.play();
 }
+
+
 
 function drawBox(){
     //this draws a box or shape
