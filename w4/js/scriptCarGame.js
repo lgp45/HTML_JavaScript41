@@ -28,7 +28,7 @@ var start = 58;
 var finish = 956;
 
 //fuel variables
-var startFuel = 900;
+var startFuel = 890;
 var fuel = startFuel;
 var barFullWidth = 512;
 
@@ -70,8 +70,8 @@ function main(){
         if(fuel > 0)
         {   
         //update x 
-        x += 1;
-        fuel -= 1;
+        x += 2;
+        fuel -= 2;
         }
     }
     
