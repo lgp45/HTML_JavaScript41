@@ -14,6 +14,7 @@ mario.src = 'images/mario.png';
 var yoshi = new Image(); 
 yoshi.src = 'images/yoshi.png';
 
+
 //variable X for our drawBox function
 var x = 0;
 
@@ -91,7 +92,7 @@ function main(){
     {
         drawResults();
     }
-    car.x +=;
+    car.x +=2;
     car.draw();
     car2.x +=1;
     car2.draw();

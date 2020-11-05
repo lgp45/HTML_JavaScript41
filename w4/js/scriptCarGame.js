@@ -14,6 +14,8 @@ mario.src = 'images/mario.png';
 var yoshi = new Image(); 
 yoshi.src = 'images/carYoshi.png';
 
+//var bkg = new Image();
+//bkg.src = 'images/Background.png';
 //variable X for our drawBox function
 var x = 0;
 
@@ -103,7 +105,9 @@ function music(){
     mySound.play();
 }
 
-
+/*function drawBackground(){
+    ctx.drawImage(bkg, x, y, 1)
+}*/
 
 function drawBox(){
     //this draws a box or shape
@@ -114,6 +118,7 @@ function drawBox(){
 function drawSprite(){
     ctx.drawImage(yoshi, x, 380, 150, 150);
 }
+
 
 function drawStartLine(){
     ctx.fillStyle = 'yellowgreen';
