@@ -17,7 +17,7 @@ btn[2].addEventListener('click', function(e){play(2)});
 
 function play(playersChoice){
     var cpuChoice = Math.floor(Math.random() * 2.999);
-    
+    ctx.clearRect(0,0, 1000, 600);
     
     
 
@@ -110,7 +110,7 @@ function play(playersChoice){
 
 
 function Tie(){
-    ctx.clearRect(0,0, 1000, 600);
+    
     ctx.lineWidth = 1;
     ctx.fillStyle = 'yellow';
     ctx.strokeStyle = 'black';
@@ -121,7 +121,7 @@ function Tie(){
 }
 
 function Win(){
-    ctx.clearRect(0,0, 1000, 600);
+    
     ctx.lineWidth = 1;
     ctx.fillStyle = 'blue';
     ctx.strokeStyle = 'black';
@@ -133,7 +133,7 @@ function Win(){
 }
 
 function Lose(){
-    ctx.clearRect(0,0, 1000, 600);
+    
     ctx.lineWidth = 1;
     ctx.fillStyle = 'red';
     ctx.strokeStyle = 'black';
