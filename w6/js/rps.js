@@ -27,55 +27,81 @@ function play(playersChoice){
                 
                 
                 Tie();
-                ctx.fillStyle = 'black';
+                ctx.fillStyle = 'yellow';
+                ctx.strokeStyle = 'black';
                 ctx.fillText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
+                ctx.strokeText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
                
             }
             else if(cpuChoice === 1){
                 
                 Lose();
-                ctx.fillStyle = 'black';
+                ctx.fillStyle = 'red';
+                ctx.strokeStyle = 'black';
                 ctx.fillText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
+                ctx.strokeText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
+               
                 
             }
             else{
                 Win();
-                ctx.fillStyle = 'black';
+                ctx.fillStyle = 'blue';
+                ctx.strokeStyle = 'black';
                 ctx.fillText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
+                ctx.strokeText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
+               
             }
             break;
         case 1: 
             if(cpuChoice === 0){
             Win();
-            ctx.fillStyle = 'black';
+            ctx.fillStyle = 'blue';
+            ctx.strokeStyle = 'black';
             ctx.fillText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
+            ctx.strokeText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
+               
             }
             else if(cpuChoice === 1){
             Tie();
-            ctx.fillStyle = 'black';
+            ctx.fillStyle = 'yellow';
+            ctx.strokeStyle = 'black';
             ctx.fillText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
+            ctx.strokeText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
+               
             }
             else{
             Lose();
-            ctx.fillStyle = 'black';
+            ctx.fillStyle = 'red';
+            ctx.strokeStyle = 'black';
             ctx.fillText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
+            ctx.strokeText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
+               
             }
             break;
         case 2: 
             if(cpuChoice === 0){
             Lose();
-            ctx.fillStyle = 'black';
+            ctx.fillStyle = 'red';
+            ctx.strokeStyle = 'black';
             ctx.fillText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
+            ctx.strokeText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
+               
             }
             else if(cpuChoice === 1){
             Win();
-            ctx.fillStyle = 'black';
+            ctx.fillStyle = 'blue';
+            ctx.strokeStyle = 'black';
             ctx.fillText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
+            ctx.strokeText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
+               
             }
             else{
             Tie();
-            ctx.fillStyle = 'black';
+            ctx.fillStyle = 'yellow';
+            ctx.strokeStyle = 'black';
             ctx.fillText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
+            ctx.strokeText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
+               
             }
             break;
 
