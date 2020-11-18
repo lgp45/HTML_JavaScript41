@@ -19,89 +19,85 @@ function play(playersChoice){
     var cpuChoice = Math.floor(Math.random() * 2.999);
     ctx.clearRect(0,0, 1000, 600);
     
+    function Tie(){
+    
+        ctx.lineWidth = 1;
+        ctx.fillStyle = 'yellow';
+        ctx.strokeStyle = 'black';
+        ctx.font = '50px Arial';
+        ctx.textAlign='center';
+        ctx.fillText('Tie!',  500, c.height/2);
+        ctx.strokeText('Tie!',  500, c.height/2);
+        ctx.fillStyle = 'yellow';
+        ctx.strokeStyle = 'black';
+        ctx.fillText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
+        ctx.strokeText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
+    }
+    
+    function Win(){
+        
+        ctx.lineWidth = 1;
+        ctx.fillStyle = 'blue';
+        ctx.strokeStyle = 'black';
+        ctx.font = '50px Arial';
+        ctx.textAlign='center';
+        ctx.fillText('You Win!',  500, c.height/2);
+        ctx.strokeText('You Win!',  500, c.height/2);
+        ctx.fillStyle = 'blue';
+        ctx.strokeStyle = 'black';
+        ctx.fillText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
+        ctx.strokeText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
+        
+    }
+    
+    function Lose(){
+        
+        ctx.lineWidth = 1;
+        ctx.fillStyle = 'red';
+        ctx.strokeStyle = 'black';
+        ctx.font = '50px Arial';
+        ctx.textAlign='center';
+        ctx.fillText('You Lose!', 500, c.height/2);
+        ctx.strokeText('You Lose!', 500, c.height/2);
+        ctx.fillStyle = 'red';
+        ctx.strokeStyle = 'black';
+        ctx.fillText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
+        ctx.strokeText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
+    }
     
 
     switch(playersChoice){
         case 0: 
             if(cpuChoice === 0){
-                
-                
                 Tie();
-                ctx.fillStyle = 'yellow';
-                ctx.strokeStyle = 'black';
-                ctx.fillText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
-                ctx.strokeText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
-               
             }
             else if(cpuChoice === 1){
-                
                 Lose();
-                ctx.fillStyle = 'red';
-                ctx.strokeStyle = 'black';
-                ctx.fillText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
-                ctx.strokeText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
-               
-                
             }
             else{
                 Win();
-                ctx.fillStyle = 'blue';
-                ctx.strokeStyle = 'black';
-                ctx.fillText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
-                ctx.strokeText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
-               
             }
             break;
         case 1: 
             if(cpuChoice === 0){
             Win();
-            ctx.fillStyle = 'blue';
-            ctx.strokeStyle = 'black';
-            ctx.fillText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
-            ctx.strokeText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
-               
             }
             else if(cpuChoice === 1){
             Tie();
-            ctx.fillStyle = 'yellow';
-            ctx.strokeStyle = 'black';
-            ctx.fillText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
-            ctx.strokeText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
-               
             }
             else{
             Lose();
-            ctx.fillStyle = 'red';
-            ctx.strokeStyle = 'black';
-            ctx.fillText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
-            ctx.strokeText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
-               
             }
             break;
         case 2: 
             if(cpuChoice === 0){
             Lose();
-            ctx.fillStyle = 'red';
-            ctx.strokeStyle = 'black';
-            ctx.fillText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
-            ctx.strokeText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
-               
             }
             else if(cpuChoice === 1){
             Win();
-            ctx.fillStyle = 'blue';
-            ctx.strokeStyle = 'black';
-            ctx.fillText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
-            ctx.strokeText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
-               
             }
             else{
             Tie();
-            ctx.fillStyle = 'yellow';
-            ctx.strokeStyle = 'black';
-            ctx.fillText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
-            ctx.strokeText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
-               
             }
             break;
 
@@ -109,36 +105,3 @@ function play(playersChoice){
 }
 
 
-function Tie(){
-    
-    ctx.lineWidth = 1;
-    ctx.fillStyle = 'yellow';
-    ctx.strokeStyle = 'black';
-    ctx.font = '50px Arial';
-    ctx.textAlign='center';
-    ctx.fillText('Tie!',  500, c.height/2);
-    ctx.strokeText('Tie!',  500, c.height/2);
-}
-
-function Win(){
-    
-    ctx.lineWidth = 1;
-    ctx.fillStyle = 'blue';
-    ctx.strokeStyle = 'black';
-    ctx.font = '50px Arial';
-    ctx.textAlign='center';
-    ctx.fillText('You Win!',  500, c.height/2);
-    ctx.strokeText('You Win!',  500, c.height/2);
-    
-}
-
-function Lose(){
-    
-    ctx.lineWidth = 1;
-    ctx.fillStyle = 'red';
-    ctx.strokeStyle = 'black';
-    ctx.font = '50px Arial';
-    ctx.textAlign='center';
-    ctx.fillText('You Lose!', 500, c.height/2);
-    ctx.strokeText('You Lose!', 500, c.height/2);
-}
