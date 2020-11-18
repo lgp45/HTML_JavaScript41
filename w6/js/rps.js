@@ -30,6 +30,7 @@ function play(playersChoice){
         ctx.strokeText('Tie!',  500, c.height/2);
         ctx.fillStyle = 'yellow';
         ctx.strokeStyle = 'black';
+        ctx.font = '40px Arial';
         ctx.fillText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
         ctx.strokeText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
     }
@@ -45,6 +46,7 @@ function play(playersChoice){
         ctx.strokeText('You Win!',  500, c.height/2);
         ctx.fillStyle = 'blue';
         ctx.strokeStyle = 'black';
+        ctx.font = '40px Arial';
         ctx.fillText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
         ctx.strokeText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
         
@@ -61,8 +63,10 @@ function play(playersChoice){
         ctx.strokeText('You Lose!', 500, c.height/2);
         ctx.fillStyle = 'red';
         ctx.strokeStyle = 'black';
+        ctx.font = '40px Arial';
         ctx.fillText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
         ctx.strokeText("You Chose: " + rps[playersChoice] + " vs " + "CPU Chose: " + rps[cpuChoice], 500, 200);
+
     }
     
 
