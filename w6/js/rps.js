@@ -19,6 +19,8 @@ function play(playersChoice){
     var cpuChoice = Math.floor(Math.random() * 2.999);
     ctx.clearRect(0,0, 1000, 600);
     
+    //nested the functions to allow for use of cpuChoice variable and applying styling to it.  
+    //i am guessing variables declared inside of a function are declared private? like C# private and public declarations but without ID.
     function Tie(){
     
         ctx.lineWidth = 1;
