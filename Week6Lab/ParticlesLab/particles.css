@@ -1,0 +1,26 @@
+html, body{
+    display: flex;
+    justify-content: center;
+}
+
+#container{
+    width: 800px;
+}
+
+#header{
+    width: 800px;
+    text-align: center;
+    background-color: wheat;
+}
+
+canvas{
+    background-color: black;
+
+}
+
+#footer{
+    width: 800px;
+    text-align: center;
+    background-color: wheat;
+
+}

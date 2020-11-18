@@ -24,6 +24,9 @@ var timer = requestAnimationFrame(main);
 var cars = [];
 var numCars = 3;
 
+//background image for the canvas
+var bkg = new Image();
+bkg.src = "image/Background.png";
 
 //variable for current state of the game
 var currentState = 0;
@@ -48,7 +51,6 @@ function GameObject()
 
     this.move = function(){
         this.x += this.speed;
-        
     }
 }
 
@@ -172,6 +174,7 @@ function main()
     ctx.clearRect(0,0,c.width,c.height);
     startLine.draw();
     finishLine.draw();
+    
 
     for (var i = 0; i < cars.length; i++){
     cars[i].draw();
@@ -186,3 +189,4 @@ function randomRange(high, low)
 {
     return Math.round(Math.random()*(high-low)+low);
 }
+
