@@ -1,0 +1,37 @@
+html, body{
+    display: flex;
+    justify-content: center;
+}
+
+nav{
+    display: flex; 
+    justify-content: center;
+}
+
+#container{
+    width: 1001px;
+    
+    padding: 7px;
+}
+
+#header{
+    width: 1001px;
+    border: 1px solid black;
+}
+
+canvas{
+    border: 1px solid black;
+}
+
+a:link, a:hover{
+    background-color: yellowgreen;
+    padding: 10px;
+    margin: 20px;
+    text-decoration: none;
+    color: blue;
+}
+
+a:hover{
+    background-color: grey;
+    color: black;
+}

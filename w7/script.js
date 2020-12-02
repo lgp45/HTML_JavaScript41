@@ -2,7 +2,10 @@ window.onload = function(){
     var c = document.querySelector('canvas');
     var ctx = c.getContext('2d');
     
-    drawSquare();
+    drawShapes();
+
+    function drawShapes(){
+        drawSquare();
 
     drawCircle();
 
@@ -11,12 +14,12 @@ window.onload = function(){
     drawStar();
 
     drawLine();
-
+    }
 
     function drawSquare(){
         
         //draw square
-        ctx.lineWidth = 10;
+        ctx.lineWidth = 5;
         ctx.fillStyle = 'yellow';
         ctx.strokeStyle = 'black';
         ctx.fillRect(85, 302, 100, 100);
