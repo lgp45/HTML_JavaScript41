@@ -1,26 +1,29 @@
 html, body{
     display: flex;
     justify-content: center;
+    background-image: url(../images/seamlessBackground.jpg);
+    
 }
 
 nav{
     display: flex; 
     justify-content: center;
+    background-color: slategray;
+}
+#header{
+    background-color: slategray;
+    color:white;
 }
 
 #container{
     width: 1001px;
-    
-    padding: 7px;
-}
-
-#header{
-    width: 1001px;
     border: 1px solid black;
+    padding: 7px;
 }
 
 canvas{
     border: 1px solid black;
+    background-color: darkgray;
 }
 
 a:link, a:hover{
@@ -32,6 +35,12 @@ a:link, a:hover{
 }
 
 a:hover{
-    background-color: grey;
+    background-color: slateblue;
     color: black;
+}
+
+#footer{
+    color:white;
+    text-align:center;
+    background-color: slategray;
 }

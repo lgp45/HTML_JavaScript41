@@ -1,6 +1,7 @@
 var c = document.querySelector('canvas');
 var ctx = c.getContext('2d');
 
+
 var rps = [];
 rps[0] = "Rock";
 rps[1] = "Paper";
@@ -17,7 +18,10 @@ btn[2].addEventListener('click', function(e){play(2)});
 
 function play(playersChoice){
     var cpuChoice = Math.floor(Math.random() * 2.999);
+    var playerScore = 0;
+    var computerScore = 0;
     ctx.clearRect(0,0, 1000, 600);
+    
     
     //nested the functions to allow for use of cpuChoice variable and applying styling to it.  
     //i am guessing variables declared inside of a function are declared private? like C# private and public declarations but without ID.

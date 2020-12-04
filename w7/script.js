@@ -4,16 +4,17 @@ window.onload = function(){
     
     drawShapes();
 
+
     function drawShapes(){
         drawSquare();
 
-    drawCircle();
+        drawCircle();
 
-    drawPentagon();
+        drawPentagon();
 
-    drawStar();
+        drawStar();
 
-    drawLine();
+        drawLine();
     }
 
     function drawSquare(){
@@ -28,11 +29,11 @@ window.onload = function(){
     }
     function drawCircle(){
         //draw circle
-        ctx.beginPath();
-        ctx.arc(385, 441, 66, 0, 360);
         ctx.lineWidth = 5;
         ctx.fillStyle = '#ffff00';
         ctx.strokeStyle = 'red';
+        ctx.beginPath();
+        ctx.arc(385, 441, 66, 0, 360);
         ctx.closePath();
         ctx.fill();
         ctx.stroke();
