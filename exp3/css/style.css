@@ -1,0 +1,46 @@
+html, body{
+    display: flex;
+    justify-content: center;
+    height: 100%
+}
+
+#header{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    line-height: 10px;
+    padding: 10px;
+}
+
+#nav{
+    font-size: 30px;
+    text-align: center;
+}
+
+#container{
+    width: 100%;
+    height: 100%
+}
+
+#left-sidebar{
+    width: 10%;
+    justify-content: left;
+    float:left;
+}
+
+#large-box{
+    width: 80%;
+    justify-content: center;
+}
+
+.c-title{
+    
+}
+
+#right-sidebar{
+    width: 10%;
+    justify-content: right;
+    float:right;
+}
+

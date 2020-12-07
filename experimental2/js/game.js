@@ -9,8 +9,10 @@ var score = 0;
 
 
 //powerUp
-//var healthPack = new Image();
-//healthPack.src = "images/unnamed.png";
+var healthPack = new Image();
+healthPack.src = "images/unnamed.png";
+var buffs = new Array();
+var numBuffs = 4;
 
 
 
@@ -19,22 +21,24 @@ function randomRange(high, low){
 }
 
 //powerup gameobject class
-/*
+
 function PowerUp(){
     this.image = healthPack;
-    this.x = randomRange(800 + 10, 0 - 10);
-    this.y = randomRange(0 + 10, c.height - 10);
-    this.h = 10;
-    this.w = 10;
+    this.w = 50;
+    this.h = 50;
+    this.x = randomRange(0 + this.w, c.width - this.w);
+    this.y = randomRange(0 + this.h, c.height - this.h) - c.height;
     this.vx = randomRange(-5, -10);
     this.vy = randomRange(2, 1);
     this.heal = 50;
 
     this.draw = function(){
-        ctx.drawImage(healthPack, this.x, this.y);
+        ctx.save();
+        ctx.drawImage(this.image, this.x, this.y, this.w, this.h);
+        ctx.restore();
     }   
 }
-*/
+
 
 //asteroids gameobject class
 function Asteroid(){
@@ -66,6 +70,9 @@ for(var i = 0; i < numAsteroids; i++){
     asteroids[i] = new Asteroid();
 }
 
+for(var i = 0; i < numBuffs; i++){
+    buffs[i] = new PowerUp();
+}
 
 //class for player ship
 function PlayerShip(){
@@ -80,6 +87,8 @@ function PlayerShip(){
     this.right = false;
     this.flameLength = 30;
     this.health = 100;
+    this.shield = 0;
+
 
 
     this.draw = function(){
@@ -147,7 +156,7 @@ function PlayerShip(){
 //this creates an instance of the ship
 var ship = new PlayerShip();
 
-//var hpBoost = new PowerUp();
+
 
 //adding in event listeners for button presses
 document.addEventListener("keydown", keyPressDown);
@@ -193,6 +202,8 @@ function main(){
     ctx.font = '15px Arial';
     ctx.fillStyle = 'white';
     ctx.fillText("Score: " + score.toString(), c.width - 150, 30);
+    ctx.fillText("Ship HP: " + ship.health.toString(), c.width - 150, 50);
+    ctx.fillText("Ship Shield: " + ship.shield.toString(), c.width - 150, 70);
     ctx.restore();
     
     //ship.vy += gravity;
@@ -218,17 +229,60 @@ function main(){
         ship.vx = 0;
     }
 
+    
+    for(var i = 0; i < buffs.length; i++){
+        var dX = ship.x - buffs[i].x;
+        var dY = ship.y - buffs[i].y;
+        var dist = Math.sqrt((dX*dX)+(dY*dY));
+        if(detectCollision(dist, (ship.h/2 + buffs[i].w))){
+            console.log("Ship collided with healthpack" + i);
+            buffs[i].y = (c.height - i.h, i.h) - c.height;
+            buffs[i].x = (c.width + i.w, i.w);
+            ship.health+= buffs[i].heal;
+            console.log("Ship HP: " + ship.health);
+            if(ship.health >= 100){
+                ship.health - 100 == ship.health;
+                ship.shield += 10;
+                ship.health = 100;
+                console.log("You have max health!...HP: " + ship.health);
+            }
+            if(ship.shield >= 100){
+                ship.shield = 100;
+            }
+        }
+         //recycles the buffs
+         if(buffs[i].y > c.height + buffs[i].h){
+            buffs[i].y = randomRange(c.height - buffs[i].h, buffs[i].h) - c.height;
+            buffs[i].x = randomRange(c.width + buffs[i].w, buffs[i].w);
+        }
+
+        if(gameOver == false){
+            buffs[i].y += buffs[i].vy;
+        }
+        buffs[i].draw();
+    }
+
+
     //loops through asteroid instances in array and draws them to the screen
     for(var i = 0; i<asteroids.length; i++){
         var dX = ship.x - asteroids[i].x;
         var dY = ship.y - asteroids[i].y;
         var dist = Math.sqrt((dX*dX) +(dY*dY));
+        var num = ship.shield;
+        num = Math.max(0, num);
         //checks for collision between asteroid and ship
         if(detectCollision(dist, (ship.h/2 + asteroids[i].radius))){
             console.log("Colliding with asteroid " + i);
             asteroids[i].y = (c.height - i.radius, i.radius) - c.height;
             asteroids[i].x = (c.width + i.radius, i.radius);
-            ship.health -= asteroids[i].damage;
+            if(ship.shield >= 0){
+                ship.shield = 0;
+                ship.health -= asteroids[i].damage;
+            }
+            else{
+            ship.shield - asteroids[i].damage;
+            }    
+        
             console.log("Ship HP: " + ship.health);
             if(ship.health <= 0)
             {
@@ -246,21 +300,13 @@ function main(){
             asteroids[i].y = randomRange(c.height - asteroids[i].radius, asteroids[i].radius) - c.height;
             asteroids[i].x = randomRange(c.width + asteroids[i].radius, asteroids[i].radius);
         }
-        /*
-        //recycle power ups
-        if(hpBoost.y > c.height + hpBoost.h){
-            hpBoost.y = randomRange(c.height - hpBoost.y, hpBoost.y) - c.height;
-            hpBoost.x = randomRange(c.width + hpBoost.x, hpBoost.x);
-            console.log('print hp');
-        }
-        */
+        
         //move the asteroids and power ups
         if(gameOver == false){
             asteroids[i].y += asteroids[i].vy;
-           // hpBoost.y += hpBoost.vy;
+           
         }
         asteroids[i].draw();
-        //hpBoost.draw();
     }
     ship.draw();
     
@@ -271,6 +317,11 @@ function main(){
     while(asteroids.length < numAsteroids){
         asteroids.push(new Asteroid());
     }
+
+    while(buffs.length < numBuffs){
+        buffs.push(new PowerUp());
+    }
+    
     timer = requestAnimationFrame(main);
 }
 
@@ -285,10 +336,11 @@ function scoreTimer(){
         //if score devided by 5 returns a remainder of zero, spawn more asteroids
         if(score % 10 == 0){
             numAsteroids += 3;
+            numBuffs +=1;
+            console.log(numBuffs);
             console.log(numAsteroids);
         }
-        console.log(score);
-        setTimeout(scoreTimer, 1000);
+        setTimeout(scoreTimer, 1000/2);
     }
 }
 
