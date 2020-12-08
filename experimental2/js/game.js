@@ -87,7 +87,7 @@ function PlayerShip(){
     this.right = false;
     this.flameLength = 30;
     this.health = 100;
-    this.shield = 0;
+    this.shield = Math.abs(0);
 
 
 
@@ -268,20 +268,22 @@ function main(){
         var dX = ship.x - asteroids[i].x;
         var dY = ship.y - asteroids[i].y;
         var dist = Math.sqrt((dX*dX) +(dY*dY));
-        var num = ship.shield;
-        num = Math.max(0, num);
+        
+        
         //checks for collision between asteroid and ship
         if(detectCollision(dist, (ship.h/2 + asteroids[i].radius))){
             console.log("Colliding with asteroid " + i);
             asteroids[i].y = (c.height - i.radius, i.radius) - c.height;
             asteroids[i].x = (c.width + i.radius, i.radius);
-            if(ship.shield >= 0){
+            
+            if(ship.health >= 0 && ship.shield <= 0){
                 ship.shield = 0;
                 ship.health -= asteroids[i].damage;
             }
             else{
-            ship.shield - asteroids[i].damage;
-            }    
+                ship.shield -= asteroids[i].damage;
+            }
+            
         
             console.log("Ship HP: " + ship.health);
             if(ship.health <= 0)
