@@ -69,8 +69,9 @@ function backgroundMove(){
     this.vx = 2;
     this.vy = 0;
     this.draw = function(){
-        ctx.drawImage(this.image, this.x, this.y);
         ctx.drawImage(this.image, this.x + 1000, this.y);
+        ctx.drawImage(this.image, this.x, this.y);
+        
     }
 
    
@@ -381,10 +382,10 @@ gameStates[0] = function(){
 
 gameStates[1] = function(){
     
-    
+    ctx.drawImage(backgroundImage, 0, 0);
     for(var i = 0; i < bgImages.length; i++){
         if(bgImages[i].x < 0 - 1000){
-            bgImages[i].x = bgImages[i].zero;
+            bgImages[i].x = 0;
             bgImages[i].draw();
             console.log("cylcing BG")
         }
