@@ -111,33 +111,7 @@ function PowerUp(){
     }   
 }
 
-/*
-function runBG(){
-    var imgWidth = 0;
-    var scrollSpeed = 10;
 
-    function scroll(){
-        
-        ctx.drawImage(backgroundImage, imgWidth, 0);
-
-        ctx.drawImage(backgroundImage, imgWidth+c.width, 0);
-
-        ctx.drawImage(backgroundImage, imgWidth+ (c.width * 2), 0);
-        
-
-        imgWidth += scrollSpeed;
-
-        if(imgWidth == c.width){
-            imgWidth = 0;
-    
-        }
-
-        requestAnimationFrame(scroll);
-    }
-    scroll();
-    
-}
-*/
 
 //asteroids gameobject class
 function Asteroid(){
@@ -382,6 +356,7 @@ gameStates[0] = function(){
 
 gameStates[1] = function(){
     
+    //this handles the background image scrolling
     ctx.drawImage(backgroundImage, 0, 0);
     for(var i = 0; i < bgImages.length; i++){
         if(bgImages[i].x < 0 - 1000){
