@@ -1,4 +1,6 @@
-//
+//I left the collision a bit forgiving so that the game was a bit more fun and you can actually make it farther.  
+//background image was strangely the most difficult part i felt. I believe I took a far more complex approach initially than I needed too
+
 var c = document.querySelector('canvas');
 var ctx = c.getContext('2d');
 var timer = requestAnimationFrame(main);
@@ -36,27 +38,21 @@ asteroidSprite.src = "images/asteroid1.png"
 var shipSprite = new Image();
 shipSprite.src = "images/shipSprite.png";
 
-//store and load our menu button images
-//play button
-
-
-
+//begin game screen
 var startScreen = new Image();
 startScreen.src = "images/Asteroid_Field.png";
-
 startScreen.onload = function(){
     main();
 }
 
-
-
+//end game screen
 var endScreen = new Image();
 endScreen.src = "images/endScreen.png";
 endScreen.onload = function(){
     main();
 }
 
-//powerUp
+//powerUp pack - was originally set up to add Health and when overflow of HP you gain armor, tested the idea on my experimtental page 2.  
 var healthPack = new Image();
 healthPack.src = "images/unnamed.png";
 var buffs = new Array();
@@ -69,14 +65,12 @@ function backgroundMove(){
     this.h = 800;
     this.zero = 0;
     this.x = 0;
-    
     this.y = 0;
-    this.vx = 1;
+    this.vx = 2;
     this.vy = 0;
     this.draw = function(){
         ctx.drawImage(this.image, this.x, this.y);
         ctx.drawImage(this.image, this.x + 1000, this.y);
-        
     }
 
    
@@ -266,12 +260,12 @@ function PlayerShip(){
             this.y = c.height-25;
             this.vy = 0;
         }
-        if(this.x > c.width - 25){
-            this.x = c.width - 25;
+        if(this.x > c.width - 35){
+            this.x = c.width - 35;
             this.vx = 0
         }
-        if(this.x < 0 + 25){
-            this.x = 0+25;
+        if(this.x < 0 + 10){
+            this.x = 0+10;
             this.vx = 0;
         }
         if(this.y < 0+25){
@@ -359,14 +353,16 @@ function keyPressDown(e){
                 currentState = 0;
                 score = 0;
                 numAsteroids = 10;
+                numBuffs = 0;
                 asteroids = [];  //setting the asteroids array to a blank array resets it.
-                numBuffs = [];
+                buffs = [];
                 numImages = [];
                 gameStart();
                 main();
             }
             else{
                 gameStart();
+                score = 0;
                 gameOver = false;
                 currentState = 1;
                 main();
