@@ -1,3 +1,4 @@
+//
 var c = document.querySelector('canvas');
 var ctx = c.getContext('2d');
 var timer = requestAnimationFrame(main);
@@ -8,16 +9,22 @@ var gameOver = true;
 var score = 0;
 var highScore = 0;
 
+//background image - using seamless texture for better loop!
+var backgroundImage = new Image();
+backgroundImage.src = "images/seamlessBackground.jpg";
+backgroundImage.onload = function(){
+    main();
+}
+
+var bgImages = new Array();
+var numImages = 3;
+
 
 //gamestate manager
 var gameStates = [];
 var currentState = 0;
 var ship;
-
-//background image - using seamless texture for better loop!
-var backgroundImage = new Image();
-backgroundImage.src = "images/seamlessBackground.jpg";
-
+var bg;
 
 
 
@@ -31,29 +38,53 @@ shipSprite.src = "images/shipSprite.png";
 
 //store and load our menu button images
 //play button
-var playButton = new Image();
-playButton.src = "images/playButton.png";
 
-var playAgainButton = new Image();
-playAgainButton = "images/playAgain.png";
+
+
+var startScreen = new Image();
+startScreen.src = "images/Asteroid_Field.png";
+
+startScreen.onload = function(){
+    main();
+}
+
+
+
+var endScreen = new Image();
+endScreen.src = "images/endScreen.png";
+endScreen.onload = function(){
+    main();
+}
 
 //powerUp
 var healthPack = new Image();
 healthPack.src = "images/unnamed.png";
 var buffs = new Array();
-var numBuffs = 4;
+var numBuffs = 0;
 
-function runBG(){
-    ctx.drawImage(backgroundImage, 0, 0);
+function backgroundMove(){
+    this.image = backgroundImage;
+    
+    this.w = 1000;
+    this.h = 800;
+    this.zero = 0;
+    this.x = 0;
+    
+    this.y = 0;
+    this.vx = 1;
+    this.vy = 0;
+    this.draw = function(){
+        ctx.drawImage(this.image, this.x, this.y);
+        ctx.drawImage(this.image, this.x + 1000, this.y);
+        
+    }
+
+   
+    
 }
 
-function drawPlayButton(){
-    ctx.drawImage(playButton ,c.width/2 - 85, c.height/2 + 30);
-}
 
-function drawPlayButton(){
-    ctx.drawImage(playAgainButton ,c.width/2 - 85, c.height/2 + 30);
-}
+
 
 
 
@@ -64,19 +95,23 @@ function randomRange(high, low){
     return Math.random() * (high - low) + low;
 }
 
+
+
 function PowerUp(){
     this.image = healthPack;
     this.w = 50;
     this.h = 50;
-    this.x = randomRange(0 + this.w, c.width - this.w);
-    this.y = randomRange(0 + this.h, c.height - this.h) - c.height;
-    this.vx = randomRange(-5, -10);
-    this.vy = randomRange(2, 1);
-    this.heal = 50;
+    this.x = randomRange(0 + this.w, c.width - this.w) - c.width;
+    this.y = randomRange(0 + this.h, c.height - this.h);
+    this.vx = randomRange(2, 1);
+    this.vy = randomRange(-5, -10);
+    this.blockDamage = 5;
+    this.resetTimer = 10;
 
     this.draw = function(){
         ctx.save();
         ctx.drawImage(this.image, this.x, this.y, this.w, this.h);
+        console.log("drawing power up");
         ctx.restore();
     }   
 }
@@ -152,8 +187,7 @@ function PlayerShip(){
     this.down = false;
     this.flameLength = 30;
     this.innerFlameLength = 18;
-    this.health = 100;
-    this.shield = Math.abs(0);
+    this.shieldTimer = 0;
 
 
     this.draw = function(){
@@ -259,13 +293,13 @@ function gameStart(){
     for(var i = 0; i < numBuffs; i++){
         buffs[i] = new PowerUp();
     }
-
+    
+    for(var i = 0; i < numImages; i++){
+        bgImages[i] = new backgroundMove();
+    }
    
     //this creates an instance of the ship
     ship = new PlayerShip();
-    
-    
-
 }
 
 
@@ -325,9 +359,9 @@ function keyPressDown(e){
                 currentState = 0;
                 score = 0;
                 numAsteroids = 10;
-                numImages = 3;
                 asteroids = [];  //setting the asteroids array to a blank array resets it.
-                bgImages = [];
+                numBuffs = [];
+                numImages = [];
                 gameStart();
                 main();
             }
@@ -346,31 +380,38 @@ function keyPressDown(e){
 
 //GameStates state machine
 gameStates[0] = function(){
-    ctx.save();
-    ctx.font = '30px Do Hyeon';
-    ctx.fillStyle = 'white';
-    ctx.textAlign = 'center';
-    ctx.fillText("Asteroid Avoidance", c.width/2, c.height/2 - 20);
-    ctx.restore();
+    ctx.drawImage(startScreen, 0, 0, c.width, c.height);
 }
 
 gameStates[1] = function(){
     
-    //draws Score to the HUD
+    
+    for(var i = 0; i < bgImages.length; i++){
+        if(bgImages[i].x < 0 - 1000){
+            bgImages[i].x = bgImages[i].zero;
+            bgImages[i].draw();
+            console.log("cylcing BG")
+        }
+
+        if(gameOver == false){
+            bgImages[i].x -= bgImages[i].vx;
+        }
+        bgImages[i].draw();
+    }
+    //ctx.drawImage(backgroundImage, 0, 0, c.width, c.height);
     ctx.save();
-    ctx.drawImage(backgroundImage, 0, 0);
+    
     ctx.lineWidth = 0.25;
     ctx.font = '20px Do Hyeon';
     ctx.fillStyle = 'white';
     ctx.strokeStyle = 'yellow';
     ctx.fillText("Score: " + score.toString(), c.width - 100, 30);
     ctx.strokeText("Score: " + score.toString(), c.width - 100, 30);
-    ctx.fillText("Ship HP: " + ship.health.toString(), c.width - 150, 50);
-    ctx.fillText("Ship Shield: " + ship.shield.toString(), c.width - 150, 70);
+    ctx.fillText("Ship Shield: " + ship.shieldTimer.toString(), c.width - 150, 70);
     ctx.restore();
 
     
-
+    
     
     
     
@@ -396,6 +437,10 @@ gameStates[1] = function(){
         ship.vy = 0;
     }
 
+    
+
+
+
     //loops throuigh buff images
     for(var i = 0; i < buffs.length; i++){
         var dX = ship.x - buffs[i].x;
@@ -403,28 +448,21 @@ gameStates[1] = function(){
         var dist = Math.sqrt((dX*dX)+(dY*dY));
         if(detectCollision(dist, (ship.h/2 + buffs[i].w))){
             console.log("Ship collided with healthpack" + i);
-            buffs[i].y = (c.height - i.h, i.h) - c.height;
-            buffs[i].x = (c.width + i.w, i.w);
-            ship.health+= buffs[i].heal;
-            console.log("Ship HP: " + ship.health);
-            if(ship.health >= 100){
-                ship.health - 100 == ship.health;
-                ship.shield += 10;
-                ship.health = 100;
-                console.log("You have max health!...HP: " + ship.health);
-            }
-            if(ship.shield >= 100){
-                ship.shield = 100;
-            }
+            buffs[i].y = (c.height + i.h, i.h);
+            buffs[i].x = (c.width - i.w, i.w) - c.width;
+            ship.shieldTimer += 5;
+            
+            
         }
          //recycles the buffs
-         if(buffs[i].y > c.height + buffs[i].h){
-            buffs[i].y = randomRange(c.height - buffs[i].h, buffs[i].h) - c.height;
-            buffs[i].x = randomRange(c.width + buffs[i].w, buffs[i].w);
+         if(buffs[i].x < 0 - buffs[i].w){
+            buffs[i].y = randomRange(c.height - buffs[i].h, buffs[i].h);
+            buffs[i].x = c.width + buffs[i].w;
+            console.log("recycling powerups");
         }
 
         if(gameOver == false){
-            buffs[i].y += buffs[i].vy;
+            buffs[i].x -= buffs[i].vx;
         }
         buffs[i].draw();
     }
@@ -441,9 +479,15 @@ gameStates[1] = function(){
         //checks for collision between asteroid and ship
         if(detectCollision(dist, (ship.h/2 + asteroids[i].radius))){
             console.log("Colliding with asteroid " + i);
+            if(ship.shieldTimer > 0){
+                asteroids[i].y = randomRange(c.height - asteroids[i].radius, asteroids[i].radius);
+                asteroids[i].x = randomRange(c.width + asteroids[i].radius, asteroids[i].radius) + c.width;
+            }
+            else{
+                currentState = 2;
+                gameOver = true;
+            }
             
-            currentState = 2;
-            gameOver = true;
             //document.removeEventListener("keydown", keyPressDown);
             //document.removeEventListener("keyup", keyPressUp);
             
@@ -486,7 +530,7 @@ gameStates[2] = function(){
 
     if(score > highScore){
         highScore = score;
-        
+        ctx.drawImage(endScreen, 0, 0, c.width, c.height);
         ctx.save();
         ctx.font = '30px Do Hyeon';
         ctx.fillStyle = 'white';
@@ -495,18 +539,19 @@ gameStates[2] = function(){
         ctx.fillText("Your NEW High Score is: " + highScore.toString(), c.width/2, c.height/2 - 30);
         ctx.fillText("NEW RECORD!", c.width/2, c.height/2);
         ctx.font = '15px Do Hyeon';
-        ctx.drawImage(playAgainButton, c.width/2 - 85, c.height/2 + 30);
         ctx.restore();
     
     }
     else{
+        
         ctx.save();
+        ctx.drawImage(endScreen, 0, 0, c.width, c.height);
         ctx.font = '30px Do Hyeon';
         ctx.fillStyle = 'white';
         ctx.textAlign = 'center';
         ctx.fillText("Game Over. Your Score was: " + score.toString(), c.width/2, c.height/2 - 60);
         ctx.fillText("Your High Score is: " + highScore.toString(), c.width/2, c.height/2 - 30);
-        ctx.drawImage(playAgainButton, c.width/2 - 85, c.height/2 + 30);
+        
         ctx.font = '15px Do Hyeon';
         ctx.restore();
     }
@@ -525,8 +570,6 @@ function main(){
     if(gameOver == false){
         timer = requestAnimationFrame(main);
         
-        
-        
     }
     
     gameStates[currentState]();
@@ -541,15 +584,19 @@ function detectCollision(distance, calcDistance){
 function scoreTimer(){
     if(gameOver == false){
         score++;
-        
+        if(ship.shieldTimer > 0)
+        {
+            ship.shieldTimer--;
+        }
         
 
-        //if score devided by 5 returns a remainder of zero, spawn more asteroids
+        //if score divided by 5 returns a remainder of zero, spawn more asteroids
         if(score % 10 == 0){
             numAsteroids += 3;
-            numBuffs +=1;
+            numBuffs++;
             console.log(numAsteroids);
         }
+        
         
         setTimeout(scoreTimer, 1000);
     }
